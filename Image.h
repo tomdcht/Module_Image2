@@ -9,9 +9,9 @@
 
 #include "Pixel.h"
 
-\class Image {
+class Image {
     private:
-        Pixel tab;      //Tableau de pixels
+        Pixel *tab;     //Tableau de pixels
         int dimx, dimy; //Dimensions de l'image
 
     public:
@@ -32,7 +32,7 @@
         Pixel getPix(int x, int y);
 
         //Mutateur : modifie le pixel de coordonnées (x,y)
-        void setPixel(int x, int, Pixel couleur);
+        void setPix(int x, int, Pixel couleur);
 
         // Dessine un rectangle plein de la couleur dans l'image (en utilisant setPix, indices en paramètre compris)
         void dessinerRectangle(int Xmin, int Ymin, int Xmax, int Ymax, Pixel couleur);
@@ -44,4 +44,4 @@
         // Effectue une série de tests vérifiant que le module fonctionne et
         // que les données membres de l'objet sont conformes
         void testRegression();
-}
+};
