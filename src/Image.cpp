@@ -10,7 +10,7 @@ Image::Image(){
     dimy = 0;
 }
 
-Image::Image(int dimensionX, int dimensionY){
+Image::Image(unsigned int dimensionX, unsigned int dimensionY){
     assert(dimensionX >= 0 && dimensionY >= 0);
     dimx = dimensionX;
     dimy = dimensionY;
@@ -27,23 +27,23 @@ Image::~Image () {
     }
 }
 
-Pixel Image::getPix(int x, int y) const{
+Pixel Image::getPix(unsigned int x, unsigned int y) const{
     assert((x >= 0 && x <= dimx) && (y >= 0 && y <= dimy));
     assert(tab != nullptr);
     return tab[y*dimx + x];
 
 }
 
-void Image::setPix(int x, int y, Pixel couleur){
+void Image::setPix(unsigned int x, unsigned int y, Pixel couleur){
     assert((x >= 0 && x <= dimx) && (y >= 0 && y <= dimy));
     assert(tab != nullptr);
     tab[dimx*y + x] = couleur;
 }
 
-void Image::dessinerRectangle(int Xmin, int Ymin, int Xmax, int Ymax, Pixel couleur){
+void Image::dessinerRectangle(unsigned int Xmin, unsigned int Ymin, unsigned int Xmax, unsigned int Ymax, Pixel couleur){
     assert((Xmin >= 0 && Xmax <= dimx) && (Ymin >= 0 && Ymax <= dimy));
-    for(int i= Xmin; i<= Xmax; i++){
-        for(int j= Ymin; j<= Ymax; j++){
+    for(unsigned int i= Xmin; i<= Xmax; i++){
+        for(unsigned int j= Ymin; j<= Ymax; j++){
             setPix(i, j, couleur);
         }
     }
@@ -92,8 +92,8 @@ void Image::sauver(const string & filename) const {
     fichier << "P3" << endl;
     fichier << dimx << " " << dimy << endl;
     fichier << "255" << endl;
-    for(unsigned int y=0; y<dimy; ++y)
-        for(unsigned int x=0; x<dimx; ++x) {
+    for(unsigned int y=0; y<=dimy; ++y)
+        for(unsigned int x=0; x<=dimx; ++x) {
             const Pixel& pix = getPix(x++,y);
             fichier << +pix.getRouge() << " " << +pix.getVert() << " " << +pix.getBleu() << " ";
         }
