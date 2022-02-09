@@ -23,15 +23,15 @@ Pixel::Pixel(const int nr ,const int ng,const int nb) {   /// Constructeur de la
     b = nb;
 }
 
-int Pixel::getRouge () { /// Accesseur : récupère la composante rouge du pixel
+int Pixel::getRouge () const { /// Accesseur : récupère la composante rouge du pixel
     return r;
 }
 
-int Pixel::getVert () { /// Accesseur : récupère la composante verte du pixel
+int Pixel::getVert () const  { /// Accesseur : récupère la composante verte du pixel
     return g;
 }
 
-int Pixel::getBleu () { /// Accesseur : récupère la composante bleue du pixel
+int Pixel::getBleu () const{ /// Accesseur : récupère la composante bleue du pixel
     return b;
 }
 

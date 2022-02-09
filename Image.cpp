@@ -12,20 +12,20 @@ Image::Image(int dimensionX, int dimensionY){
     dimx = dimensionX;
     dimy = dimensionY;
 
-    tab = new Pixel[dimx*dimy];
+    tab = new Pixel[dimensionX * dimensionY];
 }
 
 Image::~Image () {
     if(tab != nullptr){
-        delete [] tab;
+        std::cout << "Appel du destructeur";
+        delete this->tab;
         tab = nullptr;
         dimx = dimy = 0;
     }
 }
 
-Pixel Image::getPix(int x, int y){
+Pixel Image::getPix(int x, int y) const{
     assert((x >= 0 && x <= dimx) && (y >= 0 && y <= dimy));
-    assert(x<=dimx && y<=dimy);
     assert(tab != nullptr);
     return tab[y*dimx + x];
 
@@ -33,12 +33,12 @@ Pixel Image::getPix(int x, int y){
 
 void Image::setPix(int x, int y, Pixel couleur){
     assert((x >= 0 && x <= dimx) && (y >= 0 && y <= dimy));
-    assert(x<=dimx && y<=dimy);
     assert(tab != nullptr);
-    tab[y*dimx + x] = couleur;
+    tab[dimx*y + x] = couleur;
 }
 
 void Image::dessinerRectangle(int Xmin, int Ymin, int Xmax, int Ymax, Pixel couleur){
+    assert((Xmin >= 0 && Xmax <= dimx) && (Ymin >= 0 && Ymax <= dimy));
     for(int i= Xmin; i<= Xmax; i++){
         for(int j= Ymin; j<= Ymax; j++){
             setPix(i, j, couleur);
@@ -47,6 +47,7 @@ void Image::dessinerRectangle(int Xmin, int Ymin, int Xmax, int Ymax, Pixel coul
 }
 
 void Image::effacer(Pixel couleur){
+    assert(tab != nullptr);
     dessinerRectangle(0, 0, dimx, dimy, couleur);
 }
 
@@ -58,25 +59,25 @@ void Image::testRegression(){
     getchar();
     std::cout << "Ajout d'un Pixel rouge aux coordonnées 100,100" << std::endl;
     Pixel rouge(255,0,0);
-    setPix(100, 100, rouge);
+    setPix(1, 1, rouge);
     getchar();
     std::cout << "Recupèration de la valeur du pixel 100,100" << std::endl;
-    getPix(100,100);
+    getPix(1,1);
     getchar();
     std::cout << "Coloriage  de l'image en bleu avec dessinerRectangle" << std::endl;
     Pixel bleu(0,0,255);
-    dessinerRectangle(0,0,160,160, bleu);
+    dessinerRectangle(1,1,2,2, bleu);
     getchar();
     std::cout << "Vérification du coloriage de l'image en bleu avec getPix" << std::endl;
-    getPix(100, 100);
+    getPix(2, 2);
     getchar();
     std::cout << "Effacement de l'image avec la couleur blanche" << std::endl;
     Pixel blanc(255,255,255);
     effacer(blanc);
     getchar();
-    std::cout << "Appel au destructeur sur im1" << std::endl;
-    delete this;
+
+    /*std::cout << "Appel au destructeur sur im1" << std::endl;
+    im.~Image();*/
 
     std::cout << "Fin du test de regréssion" << std::endl;
-
 }

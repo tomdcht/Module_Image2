@@ -23,11 +23,11 @@ class Pixel {
 
         Pixel(const int nr ,const int ng,const int nb); /// Constructeur de la classe: initialise r,g,b avec les paramètres
 
-        int getRouge (); /// Accesseur : récupère la composante rouge du pixel
+        int getRouge () const; /// Accesseur : récupère la composante rouge du pixel
 
-        int getVert ();  /// Accesseur : récupère la composante verte du pixel
+        int getVert () const;  /// Accesseur : récupère la composante verte du pixel
 
-        int getBleu(); /// Accesseur : récupère la composante bleue du pixel
+        int getBleu() const; /// Accesseur : récupère la composante bleue du pixel
 
         void setRouge(unsigned int nr); /// Mutateur : modifie la composante rouge du pixel
 
