@@ -2,7 +2,7 @@ EXEC_NAME = module_image
 OBJ_FILES = mainTest.o Image.o Pixel.o
 
 CC = g++
-CFLAGS = -Wall -ggdbg
+CFLAGS = -Wall -ggdb
 
 all: $(EXEC_NAME)
 

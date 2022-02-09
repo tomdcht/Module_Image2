@@ -7,6 +7,7 @@
 
 */
 
+#include <string>
 #include "Pixel.h"
 
 class Image {
@@ -44,4 +45,10 @@ class Image {
         // Effectue une série de tests vérifiant que le module fonctionne et
         // que les données membres de l'objet sont conformes
         void testRegression();
+
+        void Image::sauver(const std::string & filename) const;
+
+        void Image::ouvrir(const std::string & filename);
+
+        void Image::afficherConsole();
 };
