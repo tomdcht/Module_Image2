@@ -22,7 +22,7 @@ class Image {
 
         // Constructeur de la classe: initialise dimx et dimy (après vérification)
         // puis alloue le tableau de pixel dans le tas (image noire)
-        Image (unsigned int dimensionX, unsigned int dimensionY);
+        Image (int dimensionX, int dimensionY);
 
         // Destructeur de la classe: déallocation de la mémoire du tableau de pixels
         // et mise à jour des champs dimx et dimy à 0
@@ -36,7 +36,7 @@ class Image {
         void setPix(unsigned int x, unsigned int, Pixel couleur);
 
         // Dessine un rectangle plein de la couleur dans l'image (en utilisant setPix, indices en paramètre compris)
-        void dessinerRectangle(unsigned int Xmin, unsigned int Ymin, unsigned int Xmax, unsigned int Ymax, Pixel couleur);
+        void dessinerRectangle( unsigned int Xmin,  unsigned int Ymin,  unsigned int Xmax,  unsigned int Ymax, Pixel couleur);
 
         // Efface l'image en la remplissant de la couleur en paramètre
         // (en appelant dessinerRectangle avec le bon rectangle)

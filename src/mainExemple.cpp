@@ -2,15 +2,22 @@
 
 int main() {
 
-    Pixel bleu(0,0,255);
-    Pixel blanc(255,255,255);
-    Pixel rouge(255,0,0);
+    Pixel blanc (255, 255, 255);
+    Pixel vert (4, 200, 10);
+    Pixel bleu (0, 128, 255);
 
-    Image im1(160,160);
-    im1.effacer(blanc);
-    im1.sauver("./data/white.ppm");
-    //im1.dessinerRectangle(0,0, 2, 1, bleu);
-    im1.afficherConsole();
-    im1.ouvrir("./data/white.ppm");
+    Image image1 (64,48);
+    image1.effacer(vert);
+    image1.dessinerRectangle(10, 40, 20, 44, blanc);
+    image1.setPix(2,9,bleu);
+    image1.setPix(15,42,bleu);
+    image1.sauver("./data/image1.ppm");
 
+    Image image2;
+    image2.ouvrir("./data/image1.ppm");
+    image2.dessinerRectangle(4, 14, 20, 43, blanc);
+    image2.dessinerRectangle(32, 4, 50, 8, bleu);
+    image2.sauver("./data/image2.ppm");
+
+    return 0;
 }

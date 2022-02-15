@@ -8,14 +8,21 @@ using namespace std;
 Image::Image(){
     dimx = 0;
     dimy = 0;
+    tab = nullptr;
 }
 
-Image::Image(unsigned int dimensionX, unsigned int dimensionY){
-    assert(dimensionX >= 0 && dimensionY >= 0);
+Image::Image(int dimensionX, int dimensionY){
+    assert(dimensionX > 0 && dimensionY > 0);
     dimx = dimensionX;
     dimy = dimensionY;
 
     tab = new Pixel[dimensionX * dimensionY];
+
+    Pixel noir(0,0,0);
+
+    for(int i = 0; i < dimensionX * dimensionY; i++){
+        tab[i] = noir;
+    }
 }
 
 Image::~Image () {
@@ -29,22 +36,23 @@ Image::~Image () {
 
 Pixel Image::getPix(unsigned int x, unsigned int y) const{
     assert((x >= 0 && x <= dimx) && (y >= 0 && y <= dimy));
+    assert((y*dimx + x) < dimx * dimy);
     assert(tab != nullptr);
-    //return tab[y*dimx + x];
     return tab[y*dimx + x];
 }
 
 void Image::setPix(unsigned int x, unsigned int y, Pixel couleur){
     assert((x >= 0 && x <= dimx) && (y >= 0 && y <= dimy));
     assert(tab != nullptr);
-    tab[dimx*y + x] = couleur;
+    tab[y*dimx + x] = couleur;
 }
 
 void Image::dessinerRectangle(unsigned int Xmin, unsigned int Ymin, unsigned int Xmax, unsigned int Ymax, Pixel couleur){
     assert((Xmin >= 0 && Xmax <= dimx) && (Ymin >= 0 && Ymax <= dimy));
-    for(unsigned int i= Xmin; i < Xmax; ++i){
-        for(unsigned int j= Ymin; j < Ymax; ++j){
+    for(unsigned int i = Xmin; i < Xmax; i++){
+        for(unsigned int j=Ymin ; j < Ymax; j++){
             setPix(i, j, couleur);
+            printf("setPix(i:%d, j:%d)\n", i, j);
         }
     }
 }
@@ -92,9 +100,9 @@ void Image::sauver(const string & filename) const {
     fichier << "P3" << endl;
     fichier << dimx << " " << dimy << endl;
     fichier << "255" << endl;
-    for(unsigned int x=0; x<=dimx; ++x)
-        for(unsigned int y=0; y<=dimy; ++y) {
-            const Pixel& pix = getPix(x++,y);
+    for(unsigned int y=0; y<dimy; y++)
+        for(unsigned int x=0; x<dimx; x++) {
+            const Pixel pix = getPix(x,y);
             fichier << +pix.getRouge() << " " << +pix.getVert() << " " << +pix.getBleu() << " ";
         }
     cout << "Sauvegarde de l'image " << filename << " ... OK\n";
@@ -104,19 +112,18 @@ void Image::sauver(const string & filename) const {
 void Image::ouvrir(const string & filename) {
     ifstream fichier (filename.c_str());
     assert(fichier.is_open());
-	char r,g,b;
+	unsigned int r,g,b;
 	string mot;
 	dimx = dimy = 0;
 	fichier >> mot >> dimx >> dimy >> mot;
 	assert(dimx > 0 && dimy > 0);
 	if (tab != NULL) delete [] tab;
 	tab = new Pixel [dimx*dimy];
-    for(unsigned int y=0; y<dimy; ++y)
-        for(unsigned int x=0; x<dimx; ++x) {
-            fichier >> r >> b >> g;
-            getPix(x,y).setRouge(r);
-            getPix(x,y).setVert(g);
-            getPix(x,y).setBleu(b);
+    for(unsigned int y=0; y<dimy; y++)
+        for(unsigned int x=0; x<dimx; x++) {
+            fichier >> r >> g >> b;
+            Pixel tmp(r,g,b);
+            setPix(x, y, tmp);
         }
     fichier.close();
     cout << "Lecture de l'image " << filename << " ... OK\n";
@@ -127,7 +134,7 @@ void Image::afficherConsole(){
     for(unsigned int y=0; y<dimy; ++y) {
         for(unsigned int x=0; x<dimx; ++x) {
             const Pixel& pix = getPix(x,y);
-            cout << +pix.getRouge() << " " << +pix.getVert() << " " << +pix.getBleu() << " ";
+            cout << +pix.getRouge() << " " << +pix.getVert() <<  " " << +pix.getBleu() << " ";
         }
         cout << endl;
     }
