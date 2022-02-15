@@ -21,7 +21,7 @@ Image::Image(unsigned int dimensionX, unsigned int dimensionY){
 Image::~Image () {
     if(tab != nullptr){
         std::cout << "Appel du destructeur";
-        delete this->tab;
+        delete [] this->tab;
         tab = nullptr;
         dimx = dimy = 0;
     }
@@ -30,8 +30,8 @@ Image::~Image () {
 Pixel Image::getPix(unsigned int x, unsigned int y) const{
     assert((x >= 0 && x <= dimx) && (y >= 0 && y <= dimy));
     assert(tab != nullptr);
+    //return tab[y*dimx + x];
     return tab[y*dimx + x];
-
 }
 
 void Image::setPix(unsigned int x, unsigned int y, Pixel couleur){
@@ -42,8 +42,8 @@ void Image::setPix(unsigned int x, unsigned int y, Pixel couleur){
 
 void Image::dessinerRectangle(unsigned int Xmin, unsigned int Ymin, unsigned int Xmax, unsigned int Ymax, Pixel couleur){
     assert((Xmin >= 0 && Xmax <= dimx) && (Ymin >= 0 && Ymax <= dimy));
-    for(unsigned int i= Xmin; i<= Xmax; i++){
-        for(unsigned int j= Ymin; j<= Ymax; j++){
+    for(unsigned int i= Xmin; i < Xmax; ++i){
+        for(unsigned int j= Ymin; j < Ymax; ++j){
             setPix(i, j, couleur);
         }
     }
@@ -64,7 +64,7 @@ void Image::testRegression(){
     Pixel rouge(255,0,0);
     setPix(1, 1, rouge);
     getchar();
-    std::cout << "Recupèration de la valeur du pixel 100,100" << std::endl;
+    std::cout << "Recupèration de la valeur du pixel 1,1" << std::endl;
     getPix(1,1);
     getchar();
     std::cout << "Coloriage  de l'image en bleu avec dessinerRectangle" << std::endl;
@@ -72,7 +72,7 @@ void Image::testRegression(){
     dessinerRectangle(1,1,2,2, bleu);
     getchar();
     std::cout << "Vérification du coloriage de l'image en bleu avec getPix" << std::endl;
-    getPix(2, 2);
+    getPix(2, 1);
     getchar();
     std::cout << "Effacement de l'image avec la couleur blanche" << std::endl;
     Pixel blanc(255,255,255);
@@ -92,8 +92,8 @@ void Image::sauver(const string & filename) const {
     fichier << "P3" << endl;
     fichier << dimx << " " << dimy << endl;
     fichier << "255" << endl;
-    for(unsigned int y=0; y<=dimy; ++y)
-        for(unsigned int x=0; x<=dimx; ++x) {
+    for(unsigned int x=0; x<=dimx; ++x)
+        for(unsigned int y=0; y<=dimy; ++y) {
             const Pixel& pix = getPix(x++,y);
             fichier << +pix.getRouge() << " " << +pix.getVert() << " " << +pix.getBleu() << " ";
         }
