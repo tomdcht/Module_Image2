@@ -1,6 +1,6 @@
 /**
  * \file Pixel.cpp
- * \brief Créations des fonctions et procédures de pixel.
+ * \brief Créations des fonctions et procédures de Pixel.
  * \author DE CLERCQ.A et DECHANET.T
  * \version 1.0
  * \date 8 février 2022
@@ -11,38 +11,38 @@
 
 using namespace std;
 
-Pixel::Pixel(){ /// Constructeur par défaut de la classe: initialise le pixel à la couleur noire
+Pixel::Pixel(){ 
     r = 0;
     g = 0;
     b = 0;
 }
 
-Pixel::Pixel(const int nr ,const int ng,const int nb) {   /// Constructeur de la classe: initialise r,g,b avec les paramètres
+Pixel::Pixel(const int nr ,const int ng,const int nb) {   
     r = nr;
     g = ng;
     b = nb;
 }
 
-int Pixel::getRouge () const { /// Accesseur : récupère la composante rouge du pixel
+int Pixel::getRouge () const { 
     return r;
 }
 
-int Pixel::getVert () const  { /// Accesseur : récupère la composante verte du pixel
+int Pixel::getVert () const  { 
     return g;
 }
 
-int Pixel::getBleu () const{ /// Accesseur : récupère la composante bleue du pixel
+int Pixel::getBleu () const{ 
     return b;
 }
 
-void Pixel::setRouge(unsigned int nr) { /// Mutateur : modifie la composante rouge du pixel
+void Pixel::setRouge(unsigned int nr) { 
     r = nr;
 }
 
-void Pixel::setVert(unsigned int ng) { /// Mutateur : modifie la composante vert du pixel
+void Pixel::setVert(unsigned int ng) { 
     g = ng;
 }
 
-void Pixel::setBleu(unsigned int nb) { /// Mutateur : modifie la composante bleu du pixel
+void Pixel::setBleu(unsigned int nb) { 
     b = nb;
 }

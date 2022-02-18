@@ -1,0 +1,12 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title=" " alt="" coords="5,132,60,159"/>
+<area shape="rect" id="node2" href="$class_image.html#aa3cc6f7401625c11dcd5ef003f37e4fa" title="Affiche une image" alt="" coords="117,81,289,108"/>
+<area shape="rect" id="node6" href="$class_image.html#ac0f8808d3c6a0654ad3a5d09a0c7209d" title="Dessine un rectangle plein de la couleur dans l&#39;image (en utilisant setPix, indices en paramètre comp..." alt="" coords="108,132,299,159"/>
+<area shape="rect" id="node7" href="$class_image.html#ad159951e9564d29f28112ece322c0a97" title=" " alt="" coords="145,183,261,209"/>
+<area shape="rect" id="node8" href="$class_image.html#a3696ea24faa90a9c2315e073f356960f" title="Remplace une image par celle présente dans le fichier ouvert." alt="" coords="149,233,258,260"/>
+<area shape="rect" id="node10" href="$class_image.html#adf51ae329fedeacd95f6fab809f313d5" title="Sauvegarde l&#39;image courante dans un fichier." alt="" coords="146,31,261,57"/>
+<area shape="rect" id="node3" href="$class_pixel.html#a3a76d5bac10c1ff42630e4d0f61f64b6" title="Accesseur : récupère la composante bleue du pixel." alt="" coords="353,5,463,32"/>
+<area shape="rect" id="node4" href="$class_pixel.html#ac88830ceb380e2264be281c216bda7dc" title="Accesseur : récupère la composante rouge du pixel." alt="" coords="347,56,469,83"/>
+<area shape="rect" id="node5" href="$class_pixel.html#aada697f8248bbebc7434a5e5101fb667" title="Accesseur : récupère la composante verte du pixel." alt="" coords="354,107,462,133"/>
+<area shape="rect" id="node9" href="$class_pixel.html#a2a1aed9785799a3f75de911438d0ceda" title="Mutateur : modifie la composante rouge du pixel." alt="" coords="347,233,469,260"/>
+</map>

@@ -1,9 +1,9 @@
 var indexSectionsWithContent =
 {
-  0: "gips",
+  0: "adegimopst~",
   1: "ip",
-  2: "ip",
-  3: "gps"
+  2: "imp",
+  3: "adegimopst~"
 };
 
 var indexSectionNames =
@@ -16,9 +16,9 @@ var indexSectionNames =
 
 var indexSectionLabels =
 {
-  0: "All",
+  0: "Tout",
   1: "Classes",
-  2: "Files",
-  3: "Functions"
+  2: "Fichiers",
+  3: "Fonctions"
 };
 

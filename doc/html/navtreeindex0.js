@@ -1,10 +1,11 @@
 var NAVTREEINDEX0 =
 {
-"_image_8h.html":[1,0,0],
-"_image_8h_source.html":[1,0,0],
-"_pixel_8cpp.html":[1,0,1],
-"_pixel_8h.html":[1,0,2],
-"_pixel_8h_source.html":[1,0,2],
+"_image_8cpp.html":[1,0,0,0],
+"_image_8h.html":[1,0,0,1],
+"_image_8h_source.html":[1,0,0,1],
+"_pixel_8cpp.html":[1,0,0,4],
+"_pixel_8h.html":[1,0,0,5],
+"_pixel_8h_source.html":[1,0,0,5],
 "annotated.html":[0,0],
 "class_image.html":[0,0,0],
 "class_image.html#a0294f63700543e11c0f0da85601c7ae5":[0,0,0,2],
@@ -28,9 +29,16 @@ var NAVTREEINDEX0 =
 "class_pixel.html#ac05f61697802bb7e5e45d6e20a7bb102":[0,0,1,1],
 "class_pixel.html#ac88830ceb380e2264be281c216bda7dc":[0,0,1,3],
 "classes.html":[0,1],
+"dir_68267d1309a1af8e8297ef4c3efbcdba.html":[1,0,0],
 "files.html":[1,0],
 "functions.html":[0,2,0],
 "functions_func.html":[0,2,1],
+"globals.html":[1,1,0],
+"globals_func.html":[1,1,1],
 "index.html":[],
+"main_exemple_8cpp.html":[1,0,0,2],
+"main_exemple_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4":[1,0,0,2,0],
+"main_test_8cpp.html":[1,0,0,3],
+"main_test_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe":[1,0,0,3,0],
 "pages.html":[]
 };
