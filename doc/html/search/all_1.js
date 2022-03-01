@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['image_3',['Image',['../class_image.html',1,'']]],
-  ['image_2eh_4',['Image.h',['../_image_8h.html',1,'']]]
+  ['dessinerrectangle_1',['dessinerRectangle',['../class_image.html#ac0f8808d3c6a0654ad3a5d09a0c7209d',1,'Image']]]
 ];

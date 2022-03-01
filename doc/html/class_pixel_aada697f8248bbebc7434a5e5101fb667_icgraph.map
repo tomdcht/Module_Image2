@@ -1,0 +1,6 @@
+<map id="Pixel::getVert" name="Pixel::getVert">
+<area shape="rect" id="node1" title="Accesseur : récupère la composante verte du pixel." alt="" coords="328,31,436,57"/>
+<area shape="rect" id="node2" href="$class_image.html#aa3cc6f7401625c11dcd5ef003f37e4fa" title="Affiche une image" alt="" coords="108,5,280,32"/>
+<area shape="rect" id="node4" href="$class_image.html#adf51ae329fedeacd95f6fab809f313d5" title="Sauvegarde l&#39;image courante dans un fichier." alt="" coords="137,56,251,83"/>
+<area shape="rect" id="node3" href="$main_exemple_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,60,57"/>
+</map>

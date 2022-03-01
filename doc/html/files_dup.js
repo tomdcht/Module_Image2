@@ -1,10 +1,4 @@
 var files_dup =
 [
-    [ "Image.h", "_image_8h.html", [
-      [ "Image", "class_image.html", "class_image" ]
-    ] ],
-    [ "Pixel.cpp", "_pixel_8cpp.html", null ],
-    [ "Pixel.h", "_pixel_8h.html", [
-      [ "Pixel", "class_pixel.html", "class_pixel" ]
-    ] ]
+    [ "src", "dir_68267d1309a1af8e8297ef4c3efbcdba.html", "dir_68267d1309a1af8e8297ef4c3efbcdba" ]
 ];

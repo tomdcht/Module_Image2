@@ -1,3 +1,13 @@
+/**
+ * \file Image.cpp
+ * \brief Créations des fonctions et procédures de Image.
+ * \author DE CLERCQ.A et DECHANET.T
+ * \version 1.0
+ * \date 8 février 2022
+ * \include Image.h
+ */
+
+
 #include <iostream>
 #include <assert.h>
 #include <string>

@@ -1,0 +1,4 @@
+<map id="Image::ouvrir" name="Image::ouvrir">
+<area shape="rect" id="node1" title="Remplace une image par celle présente dans le fichier ouvert." alt="" coords="5,5,115,32"/>
+<area shape="rect" id="node2" href="$class_pixel.html#a2a1aed9785799a3f75de911438d0ceda" title="Mutateur : modifie la composante rouge du pixel." alt="" coords="163,5,285,32"/>
+</map>
