@@ -52,7 +52,6 @@ void Image::dessinerRectangle(unsigned int Xmin, unsigned int Ymin, unsigned int
     for(unsigned int i = Xmin; i < Xmax; i++){
         for(unsigned int j=Ymin ; j < Ymax; j++){
             setPix(i, j, couleur);
-            printf("setPix(i:%d, j:%d)\n", i, j);
         }
     }
 }
@@ -138,4 +137,77 @@ void Image::afficherConsole(){
         }
         cout << endl;
     }
+}
+
+//SDL
+
+void Image::SDLAffInit(){
+
+    if(SDL_Init(SDL_INIT_VIDEO) < 0){
+        cout << "Erreur lors de l'initialisation de la SDL : " << SDL_GetError() << endl;
+        SDL_Quit();
+        exit(1);
+    }
+    window = SDL_CreateWindow("Hello", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 200, 200, 0);
+
+    if(!window){
+        cout << "Erreur lors de la création de l'image ! " << SDL_GetError() << endl;
+        SDL_Quit();
+        exit(1);
+    }
+
+    renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+
+    window_surface = SDL_GetWindowSurface(window);
+
+    if(!window_surface){
+        cout << "Erreur concernant la surface de la fenêtre ! " << SDL_GetError() << endl;
+        SDL_Quit();
+        exit(1);
+    }
+
+}
+
+void Image::SDLAffLoop(){
+    SDL_Event events;
+	bool quit = false;
+
+    while (!quit) {
+        if (events.type == SDL_QUIT) quit = true;
+        else if (events.type == SDL_KEYDOWN) {
+            switch (events.key.keysym.scancode) {
+                case SDL_SCANCODE_T:
+                case SDL_SCANCODE_G:
+                case SDL_SCANCODE_ESCAPE:
+                    quit = true; break;
+
+            }
+        }
+    }
+}
+
+
+
+
+void Image::afficher(){
+
+    SDL_SetRenderDrawColor(renderer, 230, 240, 255, 255);
+    SDL_RenderClear(renderer);
+
+    sauver("im.ppm");
+    window_surface = IMG_Load("im.ppm");
+
+    if (window_surface == NULL) {
+        cout<<"Error: cannot load surface "<< endl;
+        SDL_Quit();
+        exit(1);
+    }
+
+    texture = SDL_CreateTextureFromSurface(renderer,window_surface);
+    if (texture == NULL) {
+        cout << "Error: problem to create the texture of image" << endl;
+        SDL_Quit();
+        exit(1);
+    }
+
 }

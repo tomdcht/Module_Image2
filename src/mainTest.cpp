@@ -1,9 +1,7 @@
 #include "Image.h"
 
-int main(void) {
-    Image im(3,2);
-    //im.getPix(3,2);
-    im.testRegression();
-
-    return 0;
+int main() {
+   Image monImage;
+   monImage.testRegression();
+   return 0;
 }

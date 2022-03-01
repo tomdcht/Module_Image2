@@ -10,12 +10,25 @@
 #include <string>
 #include "Pixel.h"
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+
 class Image {
     private:
         Pixel *tab;     //Tableau de pixels
         unsigned int dimx, dimy; //Dimensions de l'image
 
+        void SDLAffInit();
+        void SDLAffLoop();
+        void SDLAffQuit();
+
     public:
+        SDL_Window * window;
+        SDL_Renderer * renderer;
+        SDL_Surface *window_surface;
+        SDL_Texture *texture;
         // Constructeur par défaut de la classe: initialise dimx et dimy à 0
         // ce constructeur n'alloue pas de pixel
         Image ();
@@ -41,6 +54,9 @@ class Image {
         // Efface l'image en la remplissant de la couleur en paramètre
         // (en appelant dessinerRectangle avec le bon rectangle)
         void effacer(Pixel couleur);
+
+        // Affiche l'image dans une fenêtre SDL2
+        void afficher();
 
         // Effectue une série de tests vérifiant que le module fonctionne et
         // que les données membres de l'objet sont conformes
