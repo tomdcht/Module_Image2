@@ -15,13 +15,14 @@
 #include "Image.h"
 using namespace std;
 
+
 Image::Image(){
     dimx = 0;
     dimy = 0;
     tab = nullptr;
 }
 
-Image::Image(int dimensionX, int dimensionY){
+Image::Image(unsigned int dimensionX, unsigned int dimensionY){
     assert(dimensionX > 0 && dimensionY > 0);
     dimx = dimensionX;
     dimy = dimensionY;
@@ -158,8 +159,8 @@ void Image::SDLAffInit(){
         SDL_Quit();
         exit(1);
     }
-    window = SDL_CreateWindow("Hello", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 200, 200, 0);
 
+    window = SDL_CreateWindow("SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH_WINDOW, HEIGHT_WINDOW, 0);
     if(!window){
         cout << "Erreur lors de la création de l'image ! " << SDL_GetError() << endl;
         SDL_Quit();
@@ -167,15 +168,59 @@ void Image::SDLAffInit(){
     }
 
     renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
-
-    window_surface = SDL_GetWindowSurface(window);
-
-    if(!window_surface){
-        cout << "Erreur concernant la surface de la fenêtre ! " << SDL_GetError() << endl;
+    SDL_SetRenderDrawColor(renderer, 112, 114, 110, 255);
+    SDL_RenderClear(renderer);
+    if (renderer == NULL){
+        cout << "Erreur lors de la création du renderer ! " << SDL_GetError() << endl;
         SDL_Quit();
         exit(1);
     }
 
+    picture = IMG_Load("data/im.pnm");
+    if(!picture){
+        cout << "Erreur concernant le chargement de l'image ! " << SDL_GetError() << endl;
+        SDL_Quit();
+        exit(1);
+    }
+
+    texture = SDL_CreateTextureFromSurface(renderer, picture);
+    SDL_FreeSurface(picture);
+    if(!texture){
+        cout << "Erreur concernant la création de la texture ! " << SDL_GetError() << endl;
+        SDL_Quit();
+        exit(1);
+    }
+
+    if(SDL_QueryTexture(texture, NULL, NULL, &dest_rect.w, &dest_rect.h) != 0){
+        cout << "Erreur lors de l'application de la texture ! " << SDL_GetError() << endl;
+        SDL_Quit();
+        exit(1);
+    }
+
+    if(SDL_RenderCopy(renderer, texture, &src_rect, &dest_rect) != 0){
+        cout << "Erreur lors de l'application du rendu ! " << SDL_GetError() << endl;
+        SDL_Quit();
+        exit(1);
+    }
+
+    SDL_RenderPresent(renderer);
+
+}
+
+void Image::SDL_ZoomIn(SDL_Rect rect){
+    SDL_Rect new_rect = {WIDTH_WINDOW/2 - rect.w/2, HEIGHT_WINDOW/2 - rect.h/2, rect.w + 10, rect.h + 10};
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, texture, &src_rect, &new_rect);
+    SDL_RenderPresent(renderer);
+    dest_rect = new_rect;
+}
+
+void Image::SDL_ZoomOut(SDL_Rect rect){
+    SDL_Rect new_rect = {WIDTH_WINDOW/2 - rect.w/2, HEIGHT_WINDOW/2 - rect.h/2, rect.w - 10, rect.h - 10};
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, texture, &src_rect, &new_rect);
+    SDL_RenderPresent(renderer);
+    dest_rect = new_rect;
 }
 
 void Image::SDLAffLoop(){
@@ -183,41 +228,47 @@ void Image::SDLAffLoop(){
 	bool quit = false;
 
     while (!quit) {
-        if (events.type == SDL_QUIT) quit = true;
-        else if (events.type == SDL_KEYDOWN) {
-            switch (events.key.keysym.scancode) {
-                case SDL_SCANCODE_T:
-                case SDL_SCANCODE_G:
-                case SDL_SCANCODE_ESCAPE:
-                    quit = true; break;
+        while(SDL_PollEvent(&events)){
+            switch (events.type) {
+                case SDL_KEYDOWN:
+                    if(events.key.keysym.scancode == SDL_SCANCODE_ESCAPE){
+                        cout << "Fermeture de la fenêtre" << endl;
+                        SDLAffQuit();
+                        quit = true; break;
+                    }
 
+                    if(events.key.keysym.scancode == SDL_SCANCODE_T){
+                        SDL_ZoomIn(dest_rect);
+                        cout << "Zoom In" << endl;
+                    }
+
+                    if(events.key.keysym.scancode == SDL_SCANCODE_G){
+                        SDL_ZoomOut(dest_rect);
+                        cout << "Zoom Out" << endl;
+                    }
+                    break;
+
+                case SDL_KEYUP:
+
+                case SDL_WINDOWEVENT:
+                    if (events.window.event == SDL_WINDOWEVENT_CLOSE)
+                        quit = true; break;
             }
         }
     }
 }
 
-
-
+void Image::SDLAffQuit(){
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(picture);
+    SDL_Quit();
+}
 
 void Image::afficher(){
 
-    SDL_SetRenderDrawColor(renderer, 230, 240, 255, 255);
-    SDL_RenderClear(renderer);
-
-    sauver("im.ppm");
-    window_surface = IMG_Load("im.ppm");
-
-    if (window_surface == NULL) {
-        cout<<"Error: cannot load surface "<< endl;
-        SDL_Quit();
-        exit(1);
-    }
-
-    texture = SDL_CreateTextureFromSurface(renderer,window_surface);
-    if (texture == NULL) {
-        cout << "Error: problem to create the texture of image" << endl;
-        SDL_Quit();
-        exit(1);
-    }
-
+    sauver("data/im.pnm");
+    SDLAffInit();
+    SDLAffLoop();
 }

@@ -12,9 +12,11 @@
 #include "Pixel.h"
 
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_mixer.h>
+
+#define WIDTH_WINDOW 200
+#define HEIGHT_WINDOW 200
+
 /**
  * \class Image
  * \brief Class Image
@@ -38,10 +40,11 @@ class Image {
     public:
         SDL_Window * window;
         SDL_Renderer * renderer;
-        SDL_Surface *window_surface;
+        SDL_Surface *picture;
         SDL_Texture *texture;
-        // Constructeur par défaut de la classe: initialise dimx et dimy à 0
-        // ce constructeur n'alloue pas de pixel
+        SDL_Rect dest_rect = {WIDTH_WINDOW/2,HEIGHT_WINDOW/2,HEIGHT_WINDOW,HEIGHT_WINDOW};
+        SDL_Rect src_rect = {0,0,10,10};
+
         /// Constructeur par défaut de la classe: initialise dimx et dimy à 0
         /// ce constructeur n'alloue pas de pixel
         Image ();
@@ -83,4 +86,8 @@ class Image {
 
         /// Affiche une image
         void afficherConsole();
+
+        void SDL_ZoomIn(SDL_Rect rect);
+
+        void SDL_ZoomOut(SDL_Rect rect);
 };
