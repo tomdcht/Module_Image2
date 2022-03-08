@@ -11,7 +11,7 @@ DOCDIR = doc/
 CC = g++
 CFLAGS = -ggdb
 
-all: bin/affichage bin/test bin/exemple
+all: bin/affichage bin/test bin/exemple docu
 
 bin/affichage: $(OBJDIR)mainAffichage.o $(OBJ_FILES)
 	$(CC) $(CCFLAGS) $(OBJDIR)mainAffichage.o $(OBJ_FILES) -L$(REPLIB_SDL) -lSDL2_image -lSDL2  -o $(BINDIR)affichage
