@@ -1,5 +1,3 @@
-EXEC_NAME = module_image
-
 REPLIB_SDL = /usr/include/SDL2
 
 OBJ_FILE = Image.o Pixel.o
@@ -13,19 +11,16 @@ DOCDIR = doc/
 CC = g++
 CFLAGS = -ggdb
 
-all: $(BINDIR)$(EXEC_NAME)
+all: bin/affichage bin/test bin/exemple
 
-$(EXEC_NAME): $(OBJ_FILES)
-	$(CC) $(OBJ_FILES) -o $(BINDIR)$(EXEC_NAME)
-
-affichage: $(OBJDIR)mainAffichage.o $(OBJ_FILES)
+bin/affichage: $(OBJDIR)mainAffichage.o $(OBJ_FILES)
 	$(CC) $(OBJDIR)mainAffichage.o $(OBJ_FILES) -L$(REPLIB_SDL) -lSDL2_image -lSDL2  -o $(BINDIR)affichage
 
-test: $(OBJDIR)mainTest.o $(OBJ_FILES)
-	$(CC) $(OBJDIR)mainTest.o $(OBJ_FILES) -o $(BINDIR)test
+bin/test: $(OBJDIR)mainTest.o $(OBJ_FILES)
+	$(CC) $(OBJDIR)mainTest.o $(OBJ_FILES) -L$(REPLIB_SDL) -lSDL2_image -lSDL2 -o $(BINDIR)test
 
-exemple: $(OBJDIR)mainExemple.o $(OBJ_FILES)
-	$(CC) $(OBJDIR)mainExemple.o $(OBJ_FILES) -o $(BINDIR)exemple
+bin/exemple: $(OBJDIR)mainExemple.o $(OBJ_FILES)
+	$(CC) $(OBJDIR)mainExemple.o $(OBJ_FILES) -L$(REPLIB_SDL) -lSDL2_image -lSDL2 -o $(BINDIR)exemple
 
 $(OBJDIR)mainAffichage.o: $(SRCDIR)mainAffichage.cpp $(SRCDIR)Image.h
 	$(CC) $(CFLAGS) -I$(REPLIB_SDL) -c $(SRCDIR)mainAffichage.cpp -o $(OBJDIR)mainAffichage.o
@@ -43,4 +38,4 @@ $(OBJDIR)Pixel.o: $(SRCDIR)Pixel.cpp $(SRCDIR)Pixel.h
 	$(CC) $(CFLAGS) -I$(REPLIB_SDL) -c $(SRCDIR)Pixel.cpp -o $(OBJDIR)Pixel.o
 
 clean:
-	rm $(OBJDIR)*.o
+	rm $(OBJDIR)*.o $(BINDIR)*

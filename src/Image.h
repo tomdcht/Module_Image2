@@ -59,10 +59,10 @@ class Image {
 
         /// Accesseur : récupère le pixel original de coordonnées (x,y) en vérifiant leur validité
         /// la formule pour passer d'un tab 2D à un tab 1D est tab[y*dimx+x]
-        Pixel getPix(unsigned int x, unsigned int y) const ;
+        Pixel& getPix(const unsigned int x, const unsigned int y) const;
 
         /// Mutateur : modifie le pixel de coordonnées (x,y)
-        void setPix(unsigned int x, unsigned int, Pixel couleur);
+        void setPix(const unsigned int x, const unsigned int, const Pixel& couleur) const ;
 
         /// Dessine un rectangle plein de la couleur dans l'image (en utilisant setPix, indices en paramètre compris)
         void dessinerRectangle(unsigned int Xmin, unsigned int Ymin, unsigned int Xmax, unsigned int Ymax, Pixel couleur);

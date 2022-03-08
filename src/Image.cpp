@@ -37,22 +37,21 @@ Image::Image(unsigned int dimensionX, unsigned int dimensionY){
 }
 
 Image::~Image () {
-    if(tab != nullptr){
-        std::cout << "Appel du destructeur";
+    if(tab != NULL){
         delete [] this->tab;
         tab = nullptr;
         dimx = dimy = 0;
     }
 }
 
-Pixel Image::getPix(unsigned int x, unsigned int y) const{
+Pixel& Image::getPix(const unsigned int x, const unsigned int y) const{
     assert((x >= 0 && x <= dimx) && (y >= 0 && y <= dimy));
     assert((y*dimx + x) < dimx * dimy);
     assert(tab != nullptr);
     return tab[y*dimx + x];
 }
 
-void Image::setPix(unsigned int x, unsigned int y, Pixel couleur){
+void Image::setPix(const unsigned int x, const unsigned int y, const Pixel& couleur) const{
     assert((x >= 0 && x <= dimx) && (y >= 0 && y <= dimy));
     assert(tab != nullptr);
     tab[y*dimx + x] = couleur;
@@ -96,10 +95,6 @@ void Image::testRegression(){
     Pixel blanc(255,255,255);
     effacer(blanc);
     getchar();
-
-    /*std::cout << "Appel au destructeur sur im1" << std::endl;
-    im.~Image();*/
-
     std::cout << "Fin du test de regréssion" << std::endl;
 }
 
@@ -239,12 +234,10 @@ void Image::SDLAffLoop(){
 
                     if(events.key.keysym.scancode == SDL_SCANCODE_T){
                         SDL_ZoomIn(dest_rect);
-                        cout << "Zoom In" << endl;
                     }
 
                     if(events.key.keysym.scancode == SDL_SCANCODE_G){
                         SDL_ZoomOut(dest_rect);
-                        cout << "Zoom Out" << endl;
                     }
                     break;
 

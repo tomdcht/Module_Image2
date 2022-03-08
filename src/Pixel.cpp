@@ -11,38 +11,38 @@
 
 using namespace std;
 
-Pixel::Pixel(){ 
+Pixel::Pixel(){
     r = 0;
     g = 0;
     b = 0;
 }
 
-Pixel::Pixel(const int nr ,const int ng,const int nb) {   
+Pixel::Pixel(const int nr ,const int ng,const int nb) {
     r = nr;
     g = ng;
     b = nb;
 }
 
-int Pixel::getRouge () const { 
+unsigned char Pixel::getRouge () const {
     return r;
 }
 
-int Pixel::getVert () const  { 
+unsigned char Pixel::getVert () const  {
     return g;
 }
 
-int Pixel::getBleu () const{ 
+unsigned char Pixel::getBleu () const{
     return b;
 }
 
-void Pixel::setRouge(unsigned int nr) { 
+void Pixel::setRouge(unsigned int nr) {
     r = nr;
 }
 
-void Pixel::setVert(unsigned int ng) { 
+void Pixel::setVert(unsigned int ng) {
     g = ng;
 }
 
-void Pixel::setBleu(unsigned int nb) { 
+void Pixel::setBleu(unsigned int nb) {
     b = nb;
 }
