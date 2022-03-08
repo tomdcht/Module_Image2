@@ -73,7 +73,6 @@ void Image::effacer(Pixel couleur){
 
 
 void Image::testRegression(){
-    std::cout << "Test de Regréssion" << std::endl;
 
     //test constructeur sans paramètre
     //post conditon coordonnées égale à 0 + n'alloue pas de pixel
@@ -219,7 +218,7 @@ void Image::SDLAffInit(){
 }
 
 void Image::SDL_ZoomIn(SDL_Rect rect){
-    SDL_Rect new_rect = {WIDTH_WINDOW/2 - dest_rect.w/2, HEIGHT_WINDOW/2 - dest_rect.h/2, rect.w + 10, rect.h + 10};
+    SDL_Rect new_rect = {WIDTH_WINDOW/2 - rect.w/2, HEIGHT_WINDOW/2 - rect.h/2, rect.w + 10, rect.h + 10};
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, texture, &src_rect, &new_rect);
     SDL_RenderPresent(renderer);

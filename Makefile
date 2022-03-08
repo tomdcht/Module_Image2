@@ -41,5 +41,4 @@ clean:
 	rm $(OBJDIR)*.o $(BINDIR)*
 
 doc:
-	doxygen -g doc/image.doxy
-	doxygen doc/image.doxy
+	doxygen ./doc/image.doxy

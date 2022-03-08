@@ -95,9 +95,11 @@ class Image {
         void testRegression();
 
         /** \brief Sauvegarde l'image courante dans un fichier */
+        /** \param filename : nom du fichier */
         void sauver(const std::string & filename) const;
 
         /** \brief Remplace une image par celle présente dans le fichier ouvert */
+        /** \param filename : nom du fichier */
         void ouvrir(const std::string & filename);
 
         /** \brief Affiche les données d'une image dans la console */
