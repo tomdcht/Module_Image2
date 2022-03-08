@@ -40,5 +40,6 @@ $(OBJDIR)Pixel.o: $(SRCDIR)Pixel.cpp $(SRCDIR)Pixel.h
 clean:
 	rm $(OBJDIR)*.o $(BINDIR)*
 
-doc:
-	doxygen ./doc/image.doxy
+docu: doc/image.doxy
+	doxygen doc/image.doxy
+	firefox doc/html/index.html
