@@ -14,7 +14,7 @@ CFLAGS = -ggdb
 all: bin/affichage bin/test bin/exemple
 
 bin/affichage: $(OBJDIR)mainAffichage.o $(OBJ_FILES)
-	$(CC) $(OBJDIR)mainAffichage.o $(OBJ_FILES) -L$(REPLIB_SDL) -lSDL2_image -lSDL2  -o $(BINDIR)affichage
+	$(CC) $(CCFLAGS) $(OBJDIR)mainAffichage.o $(OBJ_FILES) -L$(REPLIB_SDL) -lSDL2_image -lSDL2  -o $(BINDIR)affichage
 
 bin/test: $(OBJDIR)mainTest.o $(OBJ_FILES)
 	$(CC) $(OBJDIR)mainTest.o $(OBJ_FILES) -L$(REPLIB_SDL) -lSDL2_image -lSDL2 -o $(BINDIR)test
@@ -39,3 +39,7 @@ $(OBJDIR)Pixel.o: $(SRCDIR)Pixel.cpp $(SRCDIR)Pixel.h
 
 clean:
 	rm $(OBJDIR)*.o $(BINDIR)*
+
+doc:
+	doxygen -g doc/image.doxy
+	doxygen doc/image.doxy

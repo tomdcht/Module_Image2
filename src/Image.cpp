@@ -75,28 +75,44 @@ void Image::effacer(Pixel couleur){
 void Image::testRegression(){
     std::cout << "Test de Regréssion" << std::endl;
 
-    std::cout << "Création d'une image de dimension de 160 par 160" << std::endl;
-    getchar();
-    std::cout << "Ajout d'un Pixel rouge aux coordonnées 100,100" << std::endl;
+    //test constructeur sans paramètre
+    //post conditon coordonnées égale à 0 + n'alloue pas de pixel
+    Image im1;
+    assert(im1.dimx == 0 && im1.dimy == 0 && im1.tab == nullptr);
+
+    //test constucteur avec paramètre
+    //post condition x,y initialiser + tableau de pixel alloué
+    Image im2(4, 4);
+    Pixel unPixel = im2.getPix(1,1);
+    assert(unPixel.getRouge()==0 && unPixel.getVert()==0 && unPixel.getBleu()==0); //vérifie que les pixels sont bien noir
+    assert(im2.tab != nullptr); //tab non vide -> bien alloué
+
+    //test setPix, getPix
+    //Post condition setPix -> pixel de coodronnée (x,y) modifer
+    //Post condition getPix -> recupere le pixel de coordonné (x,y)
     Pixel rouge(255,0,0);
-    setPix(1, 1, rouge);
-    getchar();
-    std::cout << "Recupèration de la valeur du pixel 1,1" << std::endl;
-    getPix(1,1);
-    getchar();
-    std::cout << "Coloriage  de l'image en bleu avec dessinerRectangle" << std::endl;
+    im2.setPix(1,2,rouge);
+    unPixel = im2.getPix(1,2);
+    assert(unPixel.getRouge()==255); //ok pixel (1,2) rouge
+
+    //test dessinerRectangle
+    // Post conditon: création d'une retangle de couleur au coordonné Xmin,Ymin Xmax,Ymax compris
     Pixel bleu(0,0,255);
-    dessinerRectangle(1,1,2,2, bleu);
-    getchar();
-    std::cout << "Vérification du coloriage de l'image en bleu avec getPix" << std::endl;
-    getPix(2, 1);
-    getchar();
-    std::cout << "Effacement de l'image avec la couleur blanche" << std::endl;
-    Pixel blanc(255,255,255);
-    effacer(blanc);
-    getchar();
-    std::cout << "Fin du test de regréssion" << std::endl;
+    im2.dessinerRectangle(0,0,4,4,bleu);
+    unPixel = im2.getPix(0,0);
+    assert(unPixel.getBleu()==255); //test si indice de paramètre compris
+    Pixel unAutrePixel = im2.getPix(3,3);
+    assert(unAutrePixel.getBleu()==255);
+
+    //test effacer
+    // Post condition: image initial effacer et remplacer par un nouveau fond de couleur
+    im2.effacer(rouge);
+    unPixel = im2.getPix(0,0);
+    unAutrePixel = im2.getPix(3,3);
+    assert(unPixel.getRouge()==255);
+    assert(unAutrePixel.getRouge()==255);
 }
+
 
 
 void Image::sauver(const string & filename) const {
@@ -203,7 +219,7 @@ void Image::SDLAffInit(){
 }
 
 void Image::SDL_ZoomIn(SDL_Rect rect){
-    SDL_Rect new_rect = {WIDTH_WINDOW/2 - rect.w/2, HEIGHT_WINDOW/2 - rect.h/2, rect.w + 10, rect.h + 10};
+    SDL_Rect new_rect = {WIDTH_WINDOW/2 - dest_rect.w/2, HEIGHT_WINDOW/2 - dest_rect.h/2, rect.w + 10, rect.h + 10};
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, texture, &src_rect, &new_rect);
     SDL_RenderPresent(renderer);
@@ -211,7 +227,7 @@ void Image::SDL_ZoomIn(SDL_Rect rect){
 }
 
 void Image::SDL_ZoomOut(SDL_Rect rect){
-    SDL_Rect new_rect = {WIDTH_WINDOW/2 - rect.w/2, HEIGHT_WINDOW/2 - rect.h/2, rect.w - 10, rect.h - 10};
+    SDL_Rect new_rect = {WIDTH_WINDOW/2 - dest_rect.w/2, HEIGHT_WINDOW/2 - dest_rect.h/2, rect.w - 10, rect.h - 10};
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, texture, &src_rect, &new_rect);
     SDL_RenderPresent(renderer);
