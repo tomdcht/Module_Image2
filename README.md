@@ -35,8 +35,8 @@ Liste des versions : [Cliquer pour afficher](https://github.com/tomdcht/Module_I
 
 ## Auteurs
 
-* **Allan DE CLERCQ**
-* **Tom DECHANET**
+* **Allan**
+* **Tom**
 
 ## License
 
